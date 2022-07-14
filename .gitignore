@@ -31,6 +31,9 @@ $RECYCLE.BIN/
 postgres_dev/
 logfile
 
+# Environment Variables
+.env
+
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
