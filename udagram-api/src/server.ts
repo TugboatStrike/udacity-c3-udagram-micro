@@ -22,6 +22,7 @@ import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
 
   const app = express();
   //const port = process.env.PORT || 8080;
+  // moved port to pull from the config file with should have all the enviornment variables
   const port = config.port || 8080;
 
   app.use(bodyParser.json());
