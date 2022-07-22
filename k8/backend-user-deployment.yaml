@@ -94,12 +94,18 @@ spec:
               name: env-configmap
               key: AWS_REGION
         
-        - name: POSTGRES_DATABASE
+        #- name: POSTGRES_DATABASE
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      # name: postgres-database
+        #      name: env-configmap
+        #      key: POSTGRES_DATABASE
+        - name: POSTGRES_DB
           valueFrom:
             configMapKeyRef:
               # name: postgres-database
               name: env-configmap
-              key: POSTGRES_DATABASE
+              key: POSTGRES_DB
         
         - name: POSTGRES_PASSWORD
           valueFrom:
