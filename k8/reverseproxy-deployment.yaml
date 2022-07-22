@@ -16,7 +16,7 @@ spec:
         service: reverseproxy
     spec:
       containers:
-      - image: tugboatstrike/udagram-reverseproxy:latest
+      - image: tugboatstrike/udagram-reverseproxy:v1
         name: reverseproxy
         imagePullPolicy: Always
         resources:
