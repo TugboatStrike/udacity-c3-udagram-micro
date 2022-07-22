@@ -16,17 +16,21 @@ spec:
         service: backend-feed
     spec:
       containers:
-      - image: tugboatstrike/udagram-api-feed:latest
+      - image: tugboatstrike/udagram-api-feed:v1
         name: backend-feed
+        # needs to be the node name? no
+        # name: udagram-node-group
         # name: udagram-api-feed
-        imagePullPolicy: Always  
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"                  
+        # imagePullPolicy: Always 
+        ports:
+        - containerPort: 80 
+        #resources:
+        #  requests:
+        #    memory: "64Mi"
+        #    cpu: "250m"
+        #  limits:
+        #    memory: "1024Mi"
+        #    cpu: "500m"                  
         env:
         #- name: POSTGRES_PORT
         #  valueFrom:
