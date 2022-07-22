@@ -69,23 +69,13 @@ spec:
         #    configMapKeyRef:
         #      name: postgres-port
         #      key: POSTGRES_PORT
-        - name: PORT
-          valueFrom:
-            configMapKeyRef:
-              name: env-configmap
-              key: PORT
+        
         #- name: POSTGRES_DIALECT
         #  valueFrom:
         #    configMapKeyRef:
               # name: postgres-dialect
         #      name: env-configmap
         #      key: POSTGRES_DIALECT
-        - name: URL
-          valueFrom:
-            configMapKeyRef:
-              # name: url
-              name: env-configmap
-              key: URL
         
         - name: AWS_PROFILE
           valueFrom:
@@ -140,4 +130,17 @@ spec:
             secretKeyRef:
               name: env-secret
               key: POSTGRES_HOST
+        - name: URL
+          valueFrom:
+            # configMapKeyRef:
+              # name: url
+            #  name: env-configmap
+            secretKeyRef:
+              name: env-secret
+              key: URL
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: PORT
       # restartPolicy: Always
