@@ -33,6 +33,7 @@ logfile
 
 # Environment Variables
 .env
+k8/env
 
 .DS_Store
 Thumbs.db

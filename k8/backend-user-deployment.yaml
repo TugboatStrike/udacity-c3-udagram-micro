@@ -1,0 +1,143 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: backend-user
+  name: backend-user
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        service: backend-user
+    spec:
+      containers:
+      - image: tugboatstrike/udagram-api-user:latest
+        name: backend-user 
+        imagePullPolicy: Always  
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"      
+        #env:
+        #- name: POSTGRES_PORT
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: postgres-port
+        #      key: POSTGRES_PORT
+        #- name: POSTGRES_DIALECT
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: postgres-dialect
+        #      key: POSTGRES_DIALECT
+        #- name: URL
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: url
+        #      key: URL
+        #- name: JWT_SECRET
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: jwt-secret
+        #      key: JWT_SECRET
+        #- name: POSTGRES_DATABASE
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: postgres-database
+        #      key: POSTGRES_DATABASE
+        #- name: POSTGRES_HOST
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: postgres-host
+        #      key: POSTGRES_HOST
+        #- name: POSTGRES_PASSWORD
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: env-secret
+        #      key: POSTGRES_PASSWORD
+        #- name: POSTGRES_USERNAME
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: env-secret
+        #      key: POSTGRES_USERNAME
+        env:
+        #- name: POSTGRES_PORT
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: postgres-port
+        #      key: POSTGRES_PORT
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: PORT
+        #- name: POSTGRES_DIALECT
+        #  valueFrom:
+        #    configMapKeyRef:
+              # name: postgres-dialect
+        #      name: env-configmap
+        #      key: POSTGRES_DIALECT
+        - name: URL
+          valueFrom:
+            configMapKeyRef:
+              # name: url
+              name: env-configmap
+              key: URL
+        
+        - name: AWS_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              # name: aws-profile
+              name: env-configmap
+              key: AWS_PROFILE
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              # name: aws-region
+              name: env-configmap
+              key: AWS_REGION
+        
+        - name: POSTGRES_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              # name: postgres-database
+              name: env-configmap
+              key: POSTGRES_DATABASE
+        
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_USERNAME  
+        - name: AWS_MEDIA_BUCKET
+          valueFrom:
+            # configMapKeyRef:
+              # name: aws-media-bucket
+              # name: env-configmap
+            secretKeyRef:
+              name: env-secret
+              key: AWS_MEDIA_BUCKET
+        - name: JWT_SECRET
+          valueFrom:
+            # configMapKeyRef:
+              # name: jwt-secret
+            secretKeyRef:
+              name: env-secret
+              key: JWT_SECRET
+        - name: POSTGRES_HOST
+          valueFrom:
+            # configMapKeyRef:
+              # name: postgres-host
+              # name: env-configmap
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_HOST
+      # restartPolicy: Always

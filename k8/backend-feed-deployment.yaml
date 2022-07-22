@@ -1,0 +1,110 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: backend-feed
+  name: backend-feed
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: backend-feed
+    spec:
+      containers:
+      - image: tugboatstrike/udagram-api-feed:latest
+        name: backend-feed
+        imagePullPolicy: Always  
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"                  
+        env:
+        #- name: POSTGRES_PORT
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: postgres-port
+        #      key: POSTGRES_PORT
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: PORT
+        #- name: POSTGRES_DIALECT
+        #  valueFrom:
+        #    configMapKeyRef:
+              # name: postgres-dialect
+        #      name: env-configmap
+        #      key: POSTGRES_DIALECT
+        - name: URL
+          valueFrom:
+            configMapKeyRef:
+              # name: url
+              name: env-configmap
+              key: URL
+        
+        - name: AWS_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              # name: aws-profile
+              name: env-configmap
+              key: AWS_PROFILE
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              # name: aws-region
+              name: env-configmap
+              key: AWS_REGION
+        
+        - name: POSTGRES_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              # name: postgres-database
+              name: env-configmap
+              key: POSTGRES_DATABASE
+        
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_USERNAME  
+        - name: AWS_MEDIA_BUCKET
+          valueFrom:
+            # configMapKeyRef:
+              # name: aws-media-bucket
+              # name: env-configmap
+            secretKeyRef:
+              name: env-secret
+              key: AWS_MEDIA_BUCKET
+        - name: JWT_SECRET
+          valueFrom:
+            # configMapKeyRef:
+              # name: jwt-secret
+            secretKeyRef:
+              name: env-secret
+              key: JWT_SECRET
+        - name: POSTGRES_HOST
+          valueFrom:
+            # configMapKeyRef:
+              # name: postgres-host
+              # name: env-configmap
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_HOST
+        volumeMounts:
+        - name: aws-secret
+          mountPath: "/root/.aws"
+          readOnly: true        
+      # restartPolicy: Always
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret
