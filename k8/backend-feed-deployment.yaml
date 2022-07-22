@@ -1,4 +1,5 @@
-apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -6,6 +7,9 @@ metadata:
   name: backend-feed
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      service: backend-feed
   template:
     metadata:
       labels:
@@ -14,6 +18,7 @@ spec:
       containers:
       - image: tugboatstrike/udagram-api-feed:latest
         name: backend-feed
+        # name: udagram-api-feed
         imagePullPolicy: Always  
         resources:
           requests:
