@@ -17,7 +17,8 @@ spec:
         # api: external        
     spec:
       containers:
-      - image: tugboatstrike/udagram-frontend:v1
+      # - image: tugboatstrike/udagram-frontend:v1
+      - image: tugboatstrike/udagram-frontend:v2
         name: frontend
         imagePullPolicy: Always          
         ports:
