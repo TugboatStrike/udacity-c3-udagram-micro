@@ -26,7 +26,7 @@ script:
   # Tagging
   - docker tag udagram-api-feed tugboatstrike/udagram-api-feed:v1
   - docker tag udagram-api-user tugboatstrike/udagram-api-user:v1
-  - docker tag udagram-frontend tugboatstrike/udagram-frontend:v1
+  - docker tag udagram-frontend tugboatstrike/udagram-frontend:v2
   - docker tag udagram-reverseproxy tugboatstrike/udagram-reverseproxy:v1
   # Do similar for other three images
 
