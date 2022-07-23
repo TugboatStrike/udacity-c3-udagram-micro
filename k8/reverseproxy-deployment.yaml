@@ -2,18 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    service: reverseproxy
   name: reverseproxy
+  labels:
+    # service: reverseproxy
+    run: reverseproxy
 spec:
   replicas: 2
   selector:
     matchLabels:
-      service: reverseproxy
+      # service: reverseproxy
+      app: reverseproxy
   template:
     metadata:
       labels:
-        service: reverseproxy
+        # service: reverseproxy
+        app: reverseproxy
     spec:
       containers:
       - image: tugboatstrike/udagram-reverseproxy:v1
@@ -24,8 +27,10 @@ spec:
             memory: "64Mi"
             cpu: "250m"
           limits:
-            memory: "1024Mi"
+            # memory: "1024Mi"
+            memory: "2048Mi"
             cpu: "500m"   
         ports:
-        - containerPort: 8001
-      # restartPolicy: Always
+        # - containerPort: 8001
+        - containerPort: 8080
+      restartPolicy: Always

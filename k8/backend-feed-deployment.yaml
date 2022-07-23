@@ -24,13 +24,14 @@ spec:
         # imagePullPolicy: Always 
         ports:
         - containerPort: 80 
-        #resources:
-        #  requests:
-        #    memory: "64Mi"
-        #    cpu: "250m"
-        #  limits:
-        #    memory: "1024Mi"
-        #    cpu: "500m"                  
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            # memory: "1024Mi"
+            memory: "2048Mi"
+            cpu: "500m"                  
         env:
         #- name: POSTGRES_PORT
         #  valueFrom:

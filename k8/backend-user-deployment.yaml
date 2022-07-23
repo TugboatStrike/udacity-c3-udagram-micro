@@ -24,7 +24,8 @@ spec:
             memory: "64Mi"
             cpu: "250m"
           limits:
-            memory: "1024Mi"
+            # memory: "1024Mi"
+            memory: "2048Mi"
             cpu: "500m"      
         #env:
         #- name: POSTGRES_PORT
@@ -162,3 +163,14 @@ spec:
               name: env-secret
               key: PORT
       # restartPolicy: Always
+      volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws/"
+            readOnly: true
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
