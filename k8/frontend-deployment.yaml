@@ -3,18 +3,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: frontend
+    app: frontend
   name: frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      service: frontend
+      app: frontend
   template:
     metadata:
       labels:
-        service: frontend
-        api: external        
+        app: frontend
+        # api: external        
     spec:
       containers:
       - image: tugboatstrike/udagram-frontend:v1
@@ -24,11 +24,12 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
+            # memory: "64Mi"
+            memory: "1024Mi"
+            # cpu: "250m"
           limits:
             # memory: "1024Mi"
             memory: "2048Mi"
-            cpu: "500m"                
-      # restartPolicy: Always
+            # cpu: "500m"                
+      restartPolicy: Always
 

@@ -3,17 +3,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: backend-user
+    app: backend-user
   name: backend-user
 spec:
   replicas: 2
   selector:
     matchLabels:
-      service: backend-user
+      app: backend-user
   template:
     metadata:
       labels:
-        service: backend-user
+        app: backend-user
     spec:
       containers:
       - image: tugboatstrike/udagram-api-user:v1
@@ -21,12 +21,13 @@ spec:
         imagePullPolicy: Always  
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
+            # memory: "64Mi"
+            memory: "1024Mi"
+            # cpu: "250m"
           limits:
             # memory: "1024Mi"
             memory: "2048Mi"
-            cpu: "500m"      
+            # cpu: "500m"      
         #env:
         #- name: POSTGRES_PORT
         #  valueFrom:
@@ -68,6 +69,8 @@ spec:
         #    secretKeyRef:
         #      name: env-secret
         #      key: POSTGRES_USERNAME
+
+
         env:
         #- name: POSTGRES_PORT
         #  valueFrom:
@@ -162,11 +165,11 @@ spec:
             secretKeyRef:
               name: env-secret
               key: PORT
-      # restartPolicy: Always
-      volumeMounts:
-          - name: aws-secret
-            mountPath: "/root/.aws/"
-            readOnly: true
+        # restartPolicy: Always
+        volumeMounts:
+            - name: aws-secret
+              mountPath: "/root/.aws/"
+              readOnly: true
         ports:
         - containerPort: 8080
       restartPolicy: Always
