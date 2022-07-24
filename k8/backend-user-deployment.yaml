@@ -23,11 +23,11 @@ spec:
           requests:
             memory: "64Mi"
             # memory: "1024Mi"
-            # cpu: "250m"
+            cpu: "250m"
           limits:
             # memory: "1024Mi"
             memory: "2048Mi"
-            # cpu: "500m"      
+            cpu: "500m"      
         #env:
         #- name: POSTGRES_PORT
         #  valueFrom:
